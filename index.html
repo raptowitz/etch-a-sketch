@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+    <title>Etch-a-Sketch</title>
+    <style>
+        @import url(reset.css);
+        .drawArea{
+            width: 500px;
+            height: 500px;
+            background-color: grey;
+        }
+
+        .box{
+            background-color: blue;
+            width: 6.25%; 
+            height: 100%;
+        }
+
+        .row{
+            display: flex;
+            width: 100%;
+            height: 6.25%;
+            background-color: green;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class = "drawArea"></div>
+
+
+<script>
+  
+    const drawArea = document.querySelector(".drawArea");
+
+    function createRow(){
+       const row = document.createElement("div");
+       for (numBoxes=0; numBoxes<16; numBoxes++){
+           const box = document.createElement("div");
+           box.classList.add("box");
+           row.appendChild(box);
+           row.classList.add("row");
+           drawArea.appendChild(row);
+        } 
+    }
+
+   function createArea(){
+        for(numRows=0; numRows<16; numRows++){
+        createRow();
+        }
+    }
+    
+    createArea();
+
+</script>
+</body>
+</html>
