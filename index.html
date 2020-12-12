@@ -15,28 +15,31 @@
             height: 100%;
         }
 
+        .trail{
+            background-color: green;
+        }
+
         .row{
             display: flex;
             width: 100%;
             height: 6.25%;
-            background-color: green;
         }
-
 
     </style>
 </head>
 <body>
     <div class = "drawArea"></div>
+    <button class = "clear">Clear</button>
 
 
 <script>
   
-    const drawArea = document.querySelector(".drawArea");
+    let drawArea = document.querySelector(".drawArea");
 
     function createRow(){
-       const row = document.createElement("div");
+       let row = document.createElement("div");
        for (numBoxes=0; numBoxes<16; numBoxes++){
-           const box = document.createElement("div");
+           let box = document.createElement("div");
            box.classList.add("box");
            row.appendChild(box);
            row.classList.add("row");
@@ -51,6 +54,20 @@
     }
     
     createArea();
+
+    let boxes = document.querySelectorAll(".box");
+    boxes.forEach(box => box.addEventListener("mouseover", () =>{
+        box.classList.add("trail");
+    }));
+
+    let clear = document.querySelector("button");
+    clear.addEventListener("click", ()=>{
+        let boxes = document.querySelectorAll(".box");
+        boxes.forEach(box => box.classList.remove("trail"))
+    });
+
+
+
 
 </script>
 </body>
