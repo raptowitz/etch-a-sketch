@@ -11,7 +11,7 @@
 
         .box{
             background-color: blue;
-            width: 6.25%; 
+            width: 10%; 
             height: 100%;
         }
 
@@ -22,7 +22,7 @@
         .row{
             display: flex;
             width: 100%;
-            height: 6.25%;
+            height: 10%;
         }
 
     </style>
@@ -31,29 +31,36 @@
     <div class = "drawArea"></div>
     <button class = "clear">Clear</button>
 
-
 <script>
-  
     let drawArea = document.querySelector(".drawArea");
+    let x = 16;
 
-    function createRow(){
+    function createRow(userSize){
        let row = document.createElement("div");
-       for (numBoxes=0; numBoxes<16; numBoxes++){
+       row.classList.add("row");
+       
+       for (numBoxes=0; numBoxes < userSize; numBoxes++){
            let box = document.createElement("div");
            box.classList.add("box");
            row.appendChild(box);
-           row.classList.add("row");
+
+            //set size of elements
+           let width = (100 / userSize)+ "%"; 
+           row.style.height = width;
+           box.style.width = width;
+
            drawArea.appendChild(row);
         } 
     }
 
-   function createArea(){
-        for(numRows=0; numRows<16; numRows++){
-        createRow();
+
+   function createArea(userSize){
+        for(numRows=0; numRows < userSize; numRows++){
+        createRow(userSize);
         }
     }
     
-    createArea();
+    createArea(window.prompt("Grid space?"));
 
     let boxes = document.querySelectorAll(".box");
     boxes.forEach(box => box.addEventListener("mouseover", () =>{
