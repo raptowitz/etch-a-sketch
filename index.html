@@ -6,16 +6,12 @@
         .drawArea{
             width: 500px;
             height: 500px;
-            background-color: grey;
+            border: 1px solid black;
         }
 
         .box{
-            background-color: blue; 
+            background-color: white;
             height: 100%;
-        }
-
-        .trail{
-            background-color: green;
         }
 
         .row{
@@ -27,8 +23,10 @@
 </head>
 <body>
     <div class = "drawArea"></div>
-    <input type = "button" id = "clear" value = "Clear" ></input>
-    <input type = "range" id = "gridSizer" min="0" max = "100"></input>
+    <input type = "button" id = "clear" value = "Clear">
+    <input type = "button" id = "rainbow" value = "Rainbow">
+    <input type = "button" id = "shade" value = "Shade">
+    <input type = "range" id = "gridSizer" min="1" max = "100">
 
 <script>
     let drawArea = document.querySelector(".drawArea");
@@ -40,13 +38,13 @@
        for (numBoxes=0; numBoxes < userSize; numBoxes++){
            let box = document.createElement("div");
            box.classList.add("box");
-           row.appendChild(box);
-
+           
             //set size of boxes and rows
            let width = (100 / userSize)+ "%"; 
            row.style.height = width;
            box.style.width = width;
-
+           
+           row.appendChild(box);
            drawArea.appendChild(row);
         } 
     }
@@ -56,44 +54,62 @@
         createRow(userSize);
         }
     }
-    
-    //create the inital drawing area
-    let gridSizer = document.getElementById("gridSizer");
-    createArea(gridSizer.value);
 
-    let boxes = document.querySelectorAll(".box");
-    boxes.forEach(box => box.addEventListener("mouseover", () =>{
-        box.classList.add("trail");
-    }));
-
-    let clear = document.getElementById("clear");
-    clear.addEventListener("click", ()=>{
-        boxes.forEach(box => box.classList.remove("trail"))
-    });
-
-    //recreate drawing area when gride size slider is changed
-    gridSizer.addEventListener("change", ()=>{
-        //first remove the initial drawing area
-        let rows = document.querySelectorAll(".row");
-        rows.forEach(row => row.remove());
-
-        createArea(gridSizer.value);
-
+    function trailEffect(){
         let boxes = document.querySelectorAll(".box");
         boxes.forEach(box => box.addEventListener("mouseover", () =>{
-            box.classList.add("trail");
+            if (rainbow == true){
+                let randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+                return box.style.backgroundColor = randomColor;
+            }
+            else{
+                return box.style.backgroundColor = "black";
+            }
         }));
 
         let clear = document.getElementById("clear");
         clear.addEventListener("click", ()=>{
-            boxes.forEach(box => box.classList.remove("trail"))
+            boxes.forEach(box => box.style.backgroundColor = "white");
         });
+    }
+    
+    //toggle rainbow button
+    let rainbow = false;
+    let rainbowButton = document.getElementById("rainbow");
+    rainbowButton.addEventListener("click",()=>{
+        if (rainbow == false){
+            return rainbow = true;
+        }
+        else if (rainbow == true){ 
+            return rainbow = false;
+        }
     });
 
-    
+    //toggle shade button
+    let shade = false;
+    let shadeButton = document.getElementById("shade");
+    shadeButton.addEventListener("click",()=>{
+        if (shade == false){
+            return shade = true;
+        }
+        else if (shade == true){
+            return shade = false;
+        }
+    });
 
-    
 
+    //create the inital drawing area
+    let gridSizer = document.getElementById("gridSizer");
+    createArea(gridSizer.value);
+    trailEffect();
+
+    gridSizer.addEventListener("change", ()=>{
+        let rows = document.querySelectorAll(".row");
+        rows.forEach(row => row.remove());
+
+        createArea(gridSizer.value);
+        trailEffect();
+    });
 
 
 </script>
