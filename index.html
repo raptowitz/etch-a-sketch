@@ -11,6 +11,7 @@
 
         .box{
             background-color: white;
+            opacity: 1;
             height: 100%;
         }
 
@@ -57,19 +58,38 @@
 
     function trailEffect(){
         let boxes = document.querySelectorAll(".box");
-        boxes.forEach(box => box.addEventListener("mouseover", () =>{
+        boxes.forEach(box => box.addEventListener("mouseover", (e)=>{
             if (rainbow == true){
                 let randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
-                return box.style.backgroundColor = randomColor;
+                box.style.backgroundColor = randomColor;
+                box.style.opacity = 1;
+            }
+            else if (shade == true){
+                box.style.backgroundColor = "black";
+                if (e.target.style.opacity <= 0){
+                    e.target.style.opacity = e.target.style.opacity + 0.1;
+                }
+                else if (e.target.style.opacity <=0.9){
+                    let currentOpacity = e.target.style.opacity;
+                    let newOpacity = parseFloat(currentOpacity) + 0.1;
+                    e.target.style.opacity = newOpacity;
+                }
+                else {
+                    e.target.style.opacity = 0;
+                }
             }
             else{
-                return box.style.backgroundColor = "black";
+                box.style.backgroundColor = "black";
+                box.style.opacity = 1;
             }
         }));
 
         let clear = document.getElementById("clear");
         clear.addEventListener("click", ()=>{
-            boxes.forEach(box => box.style.backgroundColor = "white");
+            boxes.forEach(box => {
+                box.style.backgroundColor = "white";
+                box.style.opacity = null; 
+            });
         });
     }
     
@@ -78,10 +98,12 @@
     let rainbowButton = document.getElementById("rainbow");
     rainbowButton.addEventListener("click",()=>{
         if (rainbow == false){
-            return rainbow = true;
+            rainbow = true;
+            rainbowButton.style.backgroundColor = "green";
         }
         else if (rainbow == true){ 
-            return rainbow = false;
+            rainbow = false;
+            rainbowButton.style.backgroundColor = "";
         }
     });
 
@@ -90,10 +112,12 @@
     let shadeButton = document.getElementById("shade");
     shadeButton.addEventListener("click",()=>{
         if (shade == false){
-            return shade = true;
+            shade = true;
+            shadeButton.style.backgroundColor = "green";
         }
         else if (shade == true){
-            return shade = false;
+            shade = false;
+            shadeButton.style.backgroundColor = "";
         }
     });
 
