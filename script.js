@@ -1,4 +1,5 @@
 let drawArea = document.querySelector(".drawArea");
+drawArea.style.backgroundColor = "white";
 
 function createRow(userSize){
    let row = document.createElement("div");
@@ -55,6 +56,7 @@ function trailEffect(){
 
     let clear = document.getElementById("clear");
     clear.addEventListener("click", ()=>{
+        drawArea.style.backgroundColor = "white";
         boxes.forEach(box => {
             box.style.backgroundColor = "white";
             box.style.opacity = null; 
@@ -66,7 +68,7 @@ function trailEffect(){
 let rainbow = false;
 let rainbowButton = document.getElementById("rainbow");
 rainbowButton.addEventListener("click",()=>{
-    if (rainbow == false){
+    if (rainbow == false & shade == false){
         rainbow = true;
         rainbowButton.style.backgroundColor = "lightgreen";
     }
@@ -80,7 +82,7 @@ rainbowButton.addEventListener("click",()=>{
 let shade = false;
 let shadeButton = document.getElementById("shade");
 shadeButton.addEventListener("click",()=>{
-    if (shade == false){
+    if (shade == false & rainbow == false){
         shade = true;
         shadeButton.style.backgroundColor = "lightgreen";
     }
@@ -93,6 +95,7 @@ shadeButton.addEventListener("click",()=>{
 //toggle grinch button
 let grinchButton = document.getElementById("grinch");
 grinchButton.addEventListener("click", ()=>{
+    drawArea.style.backgroundColor = null;
     let boxes = document.querySelectorAll(".box");
     boxes.forEach(box => {
         box.style.backgroundColor = null;
@@ -110,5 +113,6 @@ gridSizer.addEventListener("change", ()=>{
     rows.forEach(row => row.remove());
 
     createArea(gridSizer.value);
-    trailEffect();
+    trailEffect(); 
+    drawArea.style.backgroundColor = "white";
 });
