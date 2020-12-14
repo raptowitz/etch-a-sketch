@@ -7,6 +7,7 @@ function createRow(userSize){
    for (numBoxes=0; numBoxes < userSize; numBoxes++){
        let box = document.createElement("div");
        box.classList.add("box");
+       box.style.backgroundColor = "white";
        
         //set size of boxes and rows
        let width = (100 / userSize)+ "%"; 
@@ -55,7 +56,7 @@ function trailEffect(){
     let clear = document.getElementById("clear");
     clear.addEventListener("click", ()=>{
         boxes.forEach(box => {
-            box.style.backgroundColor = null;
+            box.style.backgroundColor = "white";
             box.style.opacity = null; 
         });
     });
@@ -89,6 +90,15 @@ shadeButton.addEventListener("click",()=>{
     }
 });
 
+//toggle grinch button
+let grinchButton = document.getElementById("grinch");
+grinchButton.addEventListener("click", ()=>{
+    let boxes = document.querySelectorAll(".box");
+    boxes.forEach(box => {
+        box.style.backgroundColor = null;
+        box.style.opacity = null; 
+    })
+});
 
 //create the inital drawing area
 let gridSizer = document.getElementById("gridSizer");

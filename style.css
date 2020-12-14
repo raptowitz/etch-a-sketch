@@ -25,7 +25,7 @@ body{
     position: absolute;
     margin: 50vh auto 0;
     transform: translateY(-50%);
-    right: 35px;
+    right: 20px;
     padding-bottom: 500px;
 }
 
@@ -40,6 +40,12 @@ input{
     font-size: 18px;
     font-family: Georgia, serif;
 }
+
+#grinch{
+    width: 40px;
+    height: 40px;
+}
+
 
 .box{
     height: 100%;
