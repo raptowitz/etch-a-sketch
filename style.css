@@ -30,6 +30,10 @@ body{
 }
 
 input{
+    cursor: pointer;
+}
+
+.button{
     padding: 10px;
     cursor: pointer;
     border-radius: 2px;
