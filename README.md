@@ -1,1 +1,1 @@
-Etch-a-sketch project to demonstrate DOM manipulation skills. 
+Etch-a-sketch project to demonstrate DOM manipulation skills. Christmas themed in CSS!
